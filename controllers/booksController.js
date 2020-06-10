@@ -1,9 +1,12 @@
-const models = require('../models')
+const Models = require("../models");
+const booksSerializer = require("../serializers/booksSerializer");
 
 const booksController = {
   async index(req, res) {
-    // query db for all books
-    // serialize the data
-    // render response from db as json
-  }
-}
+    const eachSerializer = booksSerializer.index();
+    const booksIndex = await Models.Book.findAll(eachSerializer);
+    res.json({ books: booksIndex });
+  },
+};
+
+module.exports = booksController;
