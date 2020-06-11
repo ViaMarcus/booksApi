@@ -37,8 +37,8 @@ describe("GET /api/v1/books", () => {
   it("responds with a collection of books", () => {
     const expectedBody = {
       books: [
-        { id: 1, title: "Dune" },
-        { id: 2, title: "The Hobbit" },
+        { id: 1, title: "Dune", author: { name: "Frank Herbert" } },
+        { id: 2, title: "The Hobbit", author: { name: "J.R.R. Tolkien" } },
       ],
     };
     expect(jsonResponse(response)).to.equal(JSON.stringify(expectedBody));

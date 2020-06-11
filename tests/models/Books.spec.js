@@ -6,6 +6,7 @@ const {
 } = require("sequelize-test-helpers");
 
 const Book = require("../../models/book");
+const Author = require("../../models/Author")
 const { factory, expect } = require("../test_helper");
 
 describe("Book", () => {
@@ -44,4 +45,15 @@ describe("Book", () => {
       }
     });
   });
+
+  describe('associations', () => {
+    before(() => {
+      DescribedModel.associate(Author)
+    })
+
+    it('defines belongsTo association with Author', () => {
+      expect(DescribedModel.belongsTo).to.have.been.calledWith(Author)
+    });
+  })
+  
 });
