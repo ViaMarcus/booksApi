@@ -1,4 +1,4 @@
-const models = require('../models')
+const models = require("../models");
 
 const booksSerializer = {
   index() {
@@ -7,10 +7,10 @@ const booksSerializer = {
       include: [
         {
           model: models.Author,
-          as: 'author',
-          attributes: { exclude: ['id', 'createdAt', 'updatedAt']}
-        }
-      ]
+          as: "author",
+          attributes: { exclude: ["id", "createdAt", "updatedAt"] },
+        },
+      ],
     };
   },
 };
