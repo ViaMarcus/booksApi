@@ -1,3 +1,5 @@
+const models = require('../models')
+
 const booksSerializer = {
   index() {
     return {

@@ -15,9 +15,12 @@ after((done) => {
 });
 
 beforeEach(async () => {
+  const author = await factory.create("Author",
+    { id: 69, name: "J.R.R. Tolkien" }
+  );
   await factory.createMany("Book", 2, [
-    { id: 1, title: "Dune" },
-    { id: 2, title: "The Hobbit" },
+    { id: 1, title: "Dune", authorId: author.id },
+    { id: 2, title: "The Hobbit", authorId: author.id },
   ]);
 });
 
@@ -37,7 +40,7 @@ describe("GET /api/v1/books", () => {
   it("responds with a collection of books", () => {
     const expectedBody = {
       books: [
-        { id: 1, title: "Dune", author: { name: "Frank Herbert" } },
+        { id: 1, title: "Dune", author: { name: "J.R.R. Tolkien" } },
         { id: 2, title: "The Hobbit", author: { name: "J.R.R. Tolkien" } },
       ],
     };
