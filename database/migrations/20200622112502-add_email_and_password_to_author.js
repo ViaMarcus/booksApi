@@ -2,12 +2,12 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const migration = [
+    const migrations = [
       queryInterface.addColumn(
         'Authors',
         'email',
         {
-          type: Sequelize.string,
+          type: Sequelize.STRING,
           allowNull: false,
         }
       ),
@@ -15,17 +15,17 @@ module.exports = {
         'Authors',
         'password',
         {
-          type: Sequelize.string,
+          type: Sequelize.STRING,
           allowNull: false,
         }
       )
     ]
 
-    return Promise.new(migration)
+    return Promise.all(migrations)
   },
 
   down: (queryInterface, Sequelize) => {
-    return [
+    const migrations = [
       queryInterface.removeColumn(
         'Author', 'email'
       ),
@@ -33,5 +33,7 @@ module.exports = {
         'Author', 'password'
       ),
     ]
+    
+    return Promise.all(migrations)
   }
 };

@@ -36,7 +36,7 @@ describe("GET /api/v1/books", () => {
     beforeEach(async () => {
       await request
         .post("/api/v1/auth/login")
-        .send({ email: "user@mail.com", password: "password" })
+        .send({ email: "jr@me.com", password: "password" })
         .then((response) => {
           token = response.body.token;
         })
@@ -62,7 +62,7 @@ describe("GET /api/v1/books", () => {
     });
   });
 
-  xdescribe("for non-authenticated", () => {
+  describe("for non-authenticated", () => {
     beforeEach(() => {
       beforeEach(async () => {
         await request

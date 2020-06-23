@@ -9,16 +9,21 @@ const options = {
 module.exports = (passport) => {
   passport.use(
     new Strategy(options, async (payload, done) => {
-      await models.Author.findOne({ where: { name: payload.name } })
+      await models.Author.findOne({ where: { email: payload.email } })
       .then(author => {
-        return done(null, {
-          id: author.id,
-          name: author.name
-        })
+        if ( author.validatePassword(payload.password)){
+          return done(null, {
+            id: author.id,
+            name: author.name,
+            email: author.email,
+          })
+        } else {
+          return done(null, false, { message: "Incorrect password"})
+        }
       })
       .catch(error => {
         console.log(error)
-        return done(null, false)
+        return done(null, false, {message: "This user does not exist"})
       })
     })
   );
